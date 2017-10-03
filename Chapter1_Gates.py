@@ -223,15 +223,19 @@ def main():
    c2 = Connector(g2,g3)
    c3 = Connector(g3,g4)
    print(g4.getOutput())
+   
    #NAND test:
    nand = NandGate("NAND1")
    print(nand.getOutput())
+   
    #NOR test:
    nor = NorGate("NOR1")
    print(nor.getOutput())
+   
    #XOR test:
    xor = XorGate("XOR1")
    print(xor.getOutput())
+   
    #HalfAdder test:
    ha1 = HalfAdder("HA1")
    print(ha1.getOutput())
