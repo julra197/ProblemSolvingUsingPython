@@ -37,7 +37,7 @@ class Fraction:
          newden = self.den * otherfraction.den
          return Fraction(newnum,newden)
 
-#Exercise7: (Not working)        
+#Exercise7:       
     def __radd__(self, other):
         if(isinstance(other, int)):
             return Fraction(self.num+self.den*other, self.den)
@@ -126,9 +126,10 @@ print("1/8 != 1/2:" + str(Fraction(1,8)!=Fraction(1,2)))
 
 #secondFraction = Fraction(23.3, 7)
 
-print(aFraction.__radd__(6))
-#print(aFraction.__radd__("aString"))
-#print(aFraction+6)
+print("the radd function: " + str(6 + aFraction))
+#This should raise a Value Error :
+#print("the radd function: " + str(6.3 + aFraction))
+
 print("firstFraction before += : " + str(firstFraction))
 print("aFraction before += : " + str(aFraction))
 firstFraction += aFraction
