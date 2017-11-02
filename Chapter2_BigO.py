@@ -56,7 +56,9 @@ for i in range(0, 10000001, 1000000):
     t5 = timeit.Timer("setTest(%d)"%i, "from __main__ import setTest")
     print("del Operation on key %d of a dict lasts"%i, t5.timeit(number=1))
     
-#Answer: The del operation on a dict is faster than on a list
+#Answer: The del operation on a dict is faster than on a list. Each operation on the dict takes nearly the same amount of time.
+#In contrast, the smaller the index of the list, the longer it takes to delete the correspinding value
+# -> del on list O(n) del on dict O(1)
 
 print("=========================================================================================")
 
@@ -85,7 +87,7 @@ def findSmallest(ints, k):
 randoms = random.sample(range(1, 1000001),1000)
 print("the 3rd smallest is:", findSmallest(randoms,3))
 
-#Answer: The algorithm is not lenear
+#Answer: The algorithm is not linear
 
 print("=========================================================================================")
 
@@ -98,7 +100,7 @@ def findSmallestImp(ints, k):
 randomsI = random.sample(range(1, 100000001),1000000)
 print("the 3rd smallest is:", findSmallestImp(randomsI,3))
 
-#Answer: Since the Big-O efficiency of sort is n log n and the efficiency of the index operation is O(1), the findSmallesImp allgorithms efficency is O(n log (n))
+#Answer: Since the Big-O efficiency of sort() is n log n and the efficiency of the index operation is O(1), the findSmallesImp allgorithms efficency is O(n log (n))
 
 
 
