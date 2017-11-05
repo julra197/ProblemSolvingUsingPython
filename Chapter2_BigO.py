@@ -84,10 +84,13 @@ def findSmallest(ints, k):
                     j = j+1
     return res[k-1]            
                    
-randoms = random.sample(range(1, 1000001),1000)
-print("the 3rd smallest is:", findSmallest(randoms,3))
+randoms = random.sample(range(1, 10000001),1000)
 
-#Answer: The algorithm is not linear
+for i in range(100, 1000, 300):
+    t6 = timeit.Timer("findSmallest(randoms, %d)"%i, "from __main__ import randoms, findSmallest")     
+    print("the findSmallest to find the %d'th int in a list of size %d lasts"%(i,len(randoms)), t6.timeit(number=1))
+
+#Answer: The algorithm is linear because it inspects one integer after another
 
 print("=========================================================================================")
 
@@ -98,7 +101,9 @@ def findSmallestImp(ints, k):
     return ints[k-1]
 
 randomsI = random.sample(range(1, 100000001),1000000)
-print("the 3rd smallest is:", findSmallestImp(randomsI,3))
+for i in range(1000, 1000000, 100000):
+    t7 = timeit.Timer("findSmallestImp(randomsI, %d)"%i, "from __main__ import randomsI, findSmallestImp")     
+    print("the findSmallestImp to find the %d'th int in a list of size %d lasts"%(i,len(randomsI)), t7.timeit(number=1))
 
 #Answer: Since the Big-O efficiency of sort() is n log n and the efficiency of the index operation is O(1), the findSmallesImp allgorithms efficency is O(n log (n))
 
