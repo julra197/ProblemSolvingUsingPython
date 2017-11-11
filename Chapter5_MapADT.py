@@ -57,6 +57,15 @@ class HashTable:
     def __setitem__(self,key,data):
           self.put(key,data)
           
+    # Exercise 4: Implement the len method (__len__):
+    def __len__(self):
+        counter = 0
+        for slot in self.slots:
+            if slot != None:
+                counter += 1
+        return counter
+    
+          
 #Code to test the implementation:
 H=HashTable()
 H[54]="cat"
@@ -76,3 +85,4 @@ H[20]='duck'
 print(H[20])
 print(H.data)
 print(H[99])
+print(len(H))
