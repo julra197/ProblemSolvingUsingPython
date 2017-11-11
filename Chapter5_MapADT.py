@@ -65,6 +65,9 @@ class HashTable:
                 counter += 1
         return counter
     
+    # Exercise 5: Implement the in method (__contains__):
+    def __contains__(self, item):
+        return (item in self.data)
           
 #Code to test the implementation:
 H=HashTable()
@@ -85,4 +88,9 @@ H[20]='duck'
 print(H[20])
 print(H.data)
 print(H[99])
+print("Testing the len funcion:")
 print(len(H))
+print("Testing the in funcion:")
+print("\'tiger\' is in H:", 'tiger' in H)
+print("None is in H:", None in H)
+print("\'NotinH\' should evaluate to false:", 'notInH' in H)
