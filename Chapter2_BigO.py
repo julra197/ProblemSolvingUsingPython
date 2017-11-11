@@ -62,7 +62,7 @@ for i in range(0, 10000001, 1000000):
 
 print("=========================================================================================")
 
-#Given a list of numbers in random order write a linar time algorithm to find the kth smallest number in the list. Explain why your algorithm is linear
+#4. Given a list of numbers in random order write a linar time algorithm to find the kth smallest number in the list. Explain why your algorithm is linear
 
 
 def findSmallest(ints, k):
