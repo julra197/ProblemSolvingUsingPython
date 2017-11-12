@@ -18,7 +18,7 @@ class HashTable:
                 self.data.append(None)
             
         hashvalue = self.hashfunction(key,len(self.slots))
-           
+        rehashCount = 0   
         if self.slots[hashvalue] == None:
             self.slots[hashvalue] = key
             self.data[hashvalue] = data
@@ -26,10 +26,12 @@ class HashTable:
             if self.slots[hashvalue] == key:
                 self.data[hashvalue] = data  #replace
             else:
-                nextslot = self.rehash(hashvalue,len(self.slots))
+                nextslot = self.quadraticprobing(hashvalue,len(self.slots),rehashCount)
+                rehashCount+=1
             while self.slots[nextslot] != None and \
                           self.slots[nextslot] != key:
-                nextslot = self.rehash(nextslot,len(self.slots))
+                nextslot = self.quadraticprobing(nextslot,len(self.slots),rehashCount)
+                rehashCount += 1
     
             if self.slots[nextslot] == None:
                 self.slots[nextslot]=key
@@ -58,6 +60,17 @@ class HashTable:
     def rehash(self,oldhash,size):
         return (oldhash+1)%size
     
+    # Exercise 8: Implement quadratic probing as a rehash function
+    # I think there are two distinct approaches, one where you take the
+    # old hash and calculte the increment by 2*iteration+1
+    # or where you take the original hash and calculate the increment by
+    # by squaring iteration
+    def quadraticprobing(self, oldhash, size, iteration):
+        increment = 2*iteration+1
+        return (oldhash+increment)%size
+        pass
+        #TODO
+    
     def get(self,key):
         startslot = self.hashfunction(key,len(self.slots))
       
@@ -65,13 +78,15 @@ class HashTable:
         stop = False
         found = False
         position = startslot
+        rehashCount = 0
         while self.slots[position] != None and  \
                              not found and not stop:
            if self.slots[position] == key:
              found = True
              data = self.data[position]
            else:
-             position=self.rehash(position,len(self.slots))
+             position=self.quadraticprobing(position,len(self.slots),rehashCount)
+             rehashCount+=1
              if position == startslot:
                  stop = True
         return data
@@ -100,13 +115,15 @@ class HashTable:
         stop = False
         found = False
         position = searchslot
+        rehashCount = 0
         while not found and not stop:
             if self.slots[position] == key:
                 self.slots[position] = None
                 self.data[position] = None
                 found = True
             else:
-                position=self.rehash(position, len(self.slots))
+                position=self.quadraticprobing(position, len(self.slots),rehashCount)
+                rehashCount+=1
                 if position == searchslot:
                     stop = True
           
