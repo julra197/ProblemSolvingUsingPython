@@ -10,12 +10,15 @@ class HashTable:
     # reaches a predefined value
     
     def put(self,key,data):
-        hashvalue = self.hashfunction(key,len(self.slots))
-      
         if self.loadingfactor()>0.8:
-            pass
-            #TODO
-    
+            sizediv = self.getnextsize() - self.size
+            self.size = self.getnextsize()
+            for i in range (0, sizediv):
+                self.slots.append(None)
+                self.data.append(None)
+            
+        hashvalue = self.hashfunction(key,len(self.slots))
+           
         if self.slots[hashvalue] == None:
             self.slots[hashvalue] = key
             self.data[hashvalue] = data
@@ -33,6 +36,18 @@ class HashTable:
                 self.data[nextslot]=data
             else:
                 self.data[nextslot] = data #replace
+    
+    def getnextsize(self):
+        size = self.size
+        newSizeFound = False
+        while not newSizeFound:
+            size += 1
+            for a in range (2, size):
+                if size%a == 0:
+                    break
+                elif a==size-1:
+                    newSizeFound = True
+        return size
     
     def loadingfactor(self):
         return len(self)/self.size
@@ -127,4 +142,9 @@ del H[55]
 del H[43]
 print("Slots after deletion:", H.slots)
 print("Data after deletion:", H.data)
+print("Testing the new put function:")
+print("loading Factor", H.loadingfactor())
+H[25]="lastSlot"
+print("Slots:", H.slots)
+print("Data:", H.data)
 print("loading Factor", H.loadingfactor())
