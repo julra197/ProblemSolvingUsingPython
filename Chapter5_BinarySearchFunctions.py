@@ -83,8 +83,8 @@ def recursiveWS(aList, item):
                 return recursiveWS(passList, item)
             
 #Code to test the recursiveWS method
-
-print(recursiveWS(testList, 3))
+print("\n==Ex 3: Test recursiveWS==")
+print(recursiveWS(testList, 5))
 print(recursiveWS(testList, 1))
 print(recursiveWS(testList, 9))
 print(recursiveWS(testList, 8))
