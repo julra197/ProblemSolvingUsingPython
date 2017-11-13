@@ -8,7 +8,6 @@ class HashTable:
     
     # Exercise 7 Reimplement put so that the table will automatically resize itself when the loading factor
     # reaches a predefined value
-    
     def put(self,key,data):
         if self.loadingfactor()>0.8:
             sizediv = self.getnextsize() - self.size
@@ -64,12 +63,11 @@ class HashTable:
     # I think there are two distinct approaches, one where you take the
     # old hash and calculte the increment by 2*iteration+1
     # or where you take the original hash and calculate the increment by
-    # by squaring iteration
+    # by squaring iteration --> first approach chosen
     def quadraticprobing(self, oldhash, size, iteration):
         increment = 2*iteration+1
         return (oldhash+increment)%size
         pass
-        #TODO
     
     def get(self,key):
         startslot = self.hashfunction(key,len(self.slots))
