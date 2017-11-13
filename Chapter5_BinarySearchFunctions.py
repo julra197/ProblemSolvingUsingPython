@@ -4,11 +4,14 @@
 # Genearte a random ordered list of integers and do a benchmark analysis for each one.
 # What are your results? Can you explain them?
 
+import random
+import timeit
+
 def iterative(aList, item):
     first = 0
-    last = len(aList)
+    last = len(aList)-1
     found = False
-    while not found and first != last:
+    while not found and first <= last:
         midpoint = (first+last)//2
         if aList[midpoint] == item:
             found = True
@@ -28,9 +31,33 @@ def recursive(aList, item):
             return True
         else:
             if item > aList[midpoint]:
-                recursive(aList[midpoint+1:], item)
+                return recursive(aList[midpoint+1:], item)
             else:
-                recursive(aList[:midpoint], item)
+                return recursive(aList[:midpoint], item)
+
+#Code to test the methods
+#testList = [1,2,3,4,5,6,7,8,9]
+#print(iterative(testList, 3))
+#print(iterative(testList, 23))
+#print(recursive(testList, 3))
+#print(recursive(testList, 23))
+
+#Code to benchmark the functions
+rlist = range(1, 100000000000)
+item = rlist[random.randint(0, 99999999999)]
+nir = 100000000002
+print("item is in rlist using iterative:", iterative(rlist, item))
+print("item is in rlist using recursive:", recursive(rlist, item))
+print("nir is in rlist using iterative:", iterative(rlist, nir))
+print("nir is in rlist using recursive", recursive(rlist, nir))
 
 
+t1 = timeit.Timer("iterative(rlist, item)", "from __main__ import rlist, item, iterative")     
+print("the iterative method lasts %.8f to find an existing item" %(t1.timeit(number=100)))
+t2 = timeit.Timer("recursive(rlist, item)", "from __main__ import rlist, item, recursive")     
+print("the recursive function lasts %.8f to find an existing item" %(t2.timeit(number=100)))
+t3 = timeit.Timer("iterative(rlist, nir)", "from __main__ import rlist, nir, iterative")     
+print("the iterative method lasts %.8f to examine the list" %(t3.timeit(number=100)))
+t4 = timeit.Timer("recursive(rlist, nir)", "from __main__ import rlist, nir, recursive")     
+print("the recursive function lasts %.8f to examine the list" %(t4.timeit(number=100)))
 
