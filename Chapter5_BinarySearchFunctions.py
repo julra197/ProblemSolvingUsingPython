@@ -36,7 +36,7 @@ def recursive(aList, item):
                 return recursive(aList[:midpoint], item)
 
 #Code to test the methods
-#testList = [1,2,3,4,5,6,7,8,9]
+testList = [1,2,3,4,5,6,7,8,9]
 #print(iterative(testList, 3))
 #print(iterative(testList, 23))
 #print(recursive(testList, 3))
@@ -61,3 +61,31 @@ print("the iterative method lasts %.8f to examine the list" %(t3.timeit(number=1
 t4 = timeit.Timer("recursive(rlist, nir)", "from __main__ import rlist, nir, recursive")     
 print("the recursive function lasts %.8f to examine the list" %(t4.timeit(number=100)))
 
+# Exercise 3. Implement the binary search using recursion without the slice operator.
+
+def recursiveWS(aList, item):
+    if len(aList) == 0:
+        return False
+    else:
+        midpoint = len(aList)//2
+        if aList[midpoint] == item:
+            return True
+        else:
+            if item > aList[midpoint]:
+                passList = []
+                for i in range(midpoint+1, len(aList)):
+                    passList.append(aList[i])
+                return recursiveWS(passList, item)
+            else:
+                passList = []
+                for i in range(0, midpoint):
+                    passList.append(aList[i])
+                return recursiveWS(passList, item)
+            
+#Code to test the recursiveWS method
+
+print(recursiveWS(testList, 3))
+print(recursiveWS(testList, 1))
+print(recursiveWS(testList, 9))
+print(recursiveWS(testList, 8))
+print(recursiveWS(testList, 10))
