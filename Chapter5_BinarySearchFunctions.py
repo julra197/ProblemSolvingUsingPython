@@ -89,3 +89,8 @@ print(recursiveWS(testList, 1))
 print(recursiveWS(testList, 9))
 print(recursiveWS(testList, 8))
 print(recursiveWS(testList, 10))
+
+#Benchmark for the recursiveWS function
+
+t5 = timeit.Timer("recursiveWS(rlist, item)", "from __main__ import rlist, item, recursiveWS")     
+print("the recursiveWS function lasts %.8f to examine the list" %(t5.timeit(number=100)))
