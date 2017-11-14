@@ -43,9 +43,9 @@ testList = [1,2,3,4,5,6,7,8,9]
 #print(recursive(testList, 23))
 
 #Code to benchmark the functions
-rlist = range(1, 100000000000)
-item = rlist[random.randint(0, 99999999999)]
-nir = 100000000002
+rlist = range(1, 100000)
+item = rlist[random.randint(0, 99999)]
+nir = 100002
 print("item is in rlist using iterative:", iterative(rlist, item))
 print("item is in rlist using recursive:", recursive(rlist, item))
 print("nir is in rlist using iterative:", iterative(rlist, nir))
