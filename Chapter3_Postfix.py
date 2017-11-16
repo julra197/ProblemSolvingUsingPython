@@ -34,7 +34,8 @@ def infixToPostfix(infixexpr):
  
     for token in tokenList:
         if len(token) > 1:
-            print("token not seperated by whitespace")
+            #token not seperated by whitespace
+            return infixexpr
         #TODO
         # Code that checks the validity of a mathematical expression -> Validity of partentheses and the presence of operators between operands
         if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token in "0123456789":
