@@ -31,11 +31,12 @@ def infixToPostfix(infixexpr):
     opStack = Stack()
     postfixList = []
     tokenList = infixexpr.split()
-
+ 
     for token in tokenList:
+        if len(token) > 1:
+            print("token not seperated by whitespace")
         #TODO
         # Code that checks the validity of a mathematical expression -> Validity of partentheses and the presence of operators between operands
-        
         if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token in "0123456789":
             postfixList.append(token)
         elif token == '(':
@@ -57,3 +58,4 @@ def infixToPostfix(infixexpr):
 
 print(infixToPostfix("A * B + C * D"))
 print(infixToPostfix("( A + B ) * C - ( D - E ) * ( F + G )"))
+print(infixToPostfix("(A+B)*C-(D - E ) * ( F + G )"))
