@@ -75,11 +75,12 @@ listA = range(0, 1000000)
 # Create the queues
 q1 = Queue()
 q2 = QueueF()
-#Time the population of both queues
+#Time the enqueue function of both queues
 t1 = timeit.Timer("populate(range(0, 1000), q1)", "from __main__ import q1, populate")
 print("queue1 population lasts: ", t1.timeit(number=100))
 t2 = timeit.Timer("populate(range(0, 1000), q2)", "from __main__ import q2, populate")
 print("queue2 population lasts: ", t2.timeit(number=100))
+#Time the dequeue function of both queues
 t3 = timeit.Timer("retrieve(q1)", "from __main__ import q1, retrieve")
 print("queue1 retrieving lasts: ", t3.timeit(number=100))
 t4 = timeit.Timer("retrieve(q2)", "from __main__ import q2, retrieve")
