@@ -45,6 +45,7 @@ def parChecker(symbolString):
 
 def mathExp(symbolList):
     valid = True
+    #remove parantheses
     while "(" in symbolList: 
         symbolList.remove("(")
     while ")" in symbolList:
@@ -87,7 +88,6 @@ def infixToPostfix(infixexpr):
             #token not seperated by whitespace
             print("DEBUG: No whithespace")
             return infixexpr
-        # check operators between operands
         
         if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token in "0123456789":
             postfixList.append(token)
