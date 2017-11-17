@@ -21,6 +21,49 @@ class Stack:
      def size(self):
          return len(self.items)
 
+def parChecker(symbolString):
+    s = Stack()
+    balanced = True
+    index = 0
+    while index < len(symbolString) and balanced:
+        symbol = symbolString[index]
+        if symbol == "(" or symbol == ")":
+            if symbol == "(":
+                s.push(symbol)
+            else:
+                if s.isEmpty():
+                    balanced = False
+                else:
+                    s.pop()
+
+        index = index + 1
+
+    if balanced and s.isEmpty():
+        return True
+    else:
+        return False
+
+def mathExp(symbolList):
+    valid = True
+    while "(" in symbolList: 
+        symbolList.remove("(")
+    while ")" in symbolList:
+        symbolList.remove(")")
+    index = 1
+    while index < len(symbolList) and valid:
+        symbol = symbolList[index]
+        prevSymbol = symbolList[index-1]
+        if symbol in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or symbol in "0123456789":
+            if not prevSymbol in ["*","/","+","-"]:
+                valid = False
+                #print("first DEBUG %d sym: %s prev: %s "%(index, symbol, prevSymbol))
+        if prevSymbol in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or prevSymbol in "0123456789":
+            if not symbol in ["*","/","+","-"]:
+                valid = False
+                #print("second DEBUG %d sym: %s prev: %s "%(index, symbol, prevSymbol))
+        index += 1
+    return valid
+
 def infixToPostfix(infixexpr):
     prec = {}
     prec["*"] = 3
@@ -31,13 +74,21 @@ def infixToPostfix(infixexpr):
     opStack = Stack()
     postfixList = []
     tokenList = infixexpr.split()
+    #Check the balance of parantheses
+    if not parChecker(infixexpr):
+        print("DEBUG: unbalanced parantheses")
+        return infixexpr
+    if not mathExp(tokenList.copy()):
+        print("DEBUG: not a proper math expression")
+        return infixexpr
  
     for token in tokenList:
         if len(token) > 1:
             #token not seperated by whitespace
+            print("DEBUG: No whithespace")
             return infixexpr
-        #TODO
-        # Code that checks the validity of a mathematical expression -> Validity of partentheses and the presence of operators between operands
+        # check operators between operands
+        
         if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token in "0123456789":
             postfixList.append(token)
         elif token == '(':
@@ -60,3 +111,5 @@ def infixToPostfix(infixexpr):
 print(infixToPostfix("A * B + C * D"))
 print(infixToPostfix("( A + B ) * C - ( D - E ) * ( F + G )"))
 print(infixToPostfix("(A+B)*C-(D - E ) * ( F + G )"))
+print(infixToPostfix("( A + B ) * C - D - E ) * ( F + G )"))
+print(infixToPostfix("A B + C * D"))
